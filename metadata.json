@@ -1,0 +1,6 @@
+{
+  "name": "នាំដឹង - To Know Video Manager",
+  "description": "កម្មវិធីគ្រប់គ្រងវីដេអូសម្រាប់ទំព័រ នាំដឹង - To Know | Video Management Web Application for To Know Knowledge & Science Channel",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

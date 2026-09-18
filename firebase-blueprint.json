@@ -1,0 +1,150 @@
+{
+  "entities": {
+    "Video": {
+      "title": "Video",
+      "description": "A video document managed in the To Know library",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the video"
+        },
+        "title": {
+          "type": "string",
+          "description": "Title of the video in Khmer",
+          "minLength": 1,
+          "maxLength": 500
+        },
+        "titleEn": {
+          "type": "string",
+          "description": "Optional English title of the video",
+          "maxLength": 500
+        },
+        "url": {
+          "type": "string",
+          "description": "URL of the video (Facebook, YouTube, direct MP4)",
+          "minLength": 5,
+          "maxLength": 3000
+        },
+        "embedUrl": {
+          "type": "string",
+          "description": "Embeddable player URL",
+          "maxLength": 5000
+        },
+        "platform": {
+          "type": "string",
+          "enum": ["facebook", "youtube", "direct", "other"]
+        },
+        "category": {
+          "type": "string",
+          "enum": ["បច្ចេកវិទ្យា", "វិទ្យាសាស្ត្រ", "ចំណេះដឹងទូទៅ", "ប្រវត្តិសាស្ត្រ", "សុខភាព & ខួរក្បាល", "គន្លឹះខ្លីៗ"]
+        },
+        "description": {
+          "type": "string",
+          "maxLength": 10000
+        },
+        "thumbnail": {
+          "type": "string",
+          "maxLength": 800000
+        },
+        "duration": {
+          "type": "string",
+          "maxLength": 50
+        },
+        "views": {
+          "type": "number",
+          "description": "View count"
+        },
+        "likes": {
+          "type": "number",
+          "description": "Like count"
+        },
+        "shares": {
+          "type": "number",
+          "description": "Share count"
+        },
+        "publishDate": {
+          "type": "string",
+          "maxLength": 50
+        },
+        "status": {
+          "type": "string",
+          "enum": ["published", "draft", "scheduled"]
+        },
+        "mediaType": {
+          "type": "string",
+          "enum": ["video", "gallery", "mixed"],
+          "description": "Content media type: video, multi-image gallery, or mixed video and gallery"
+        },
+        "images": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "List of attached image URLs or uploaded photo slides"
+        },
+        "previewVideoUrl": {
+          "type": "string",
+          "maxLength": 5000,
+          "description": "Direct extracted or uploaded video stream URL"
+        },
+        "tags": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "List of tags associated with the video"
+        },
+        "isFavorite": {
+          "type": "boolean"
+        },
+        "notes": {
+          "type": "string",
+          "maxLength": 5000
+        },
+        "creatorChecklist": {
+          "type": "object",
+          "description": "Production checklist items"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["id", "title", "url", "platform", "category", "status"]
+    },
+    "AppSettings": {
+      "title": "AppSettings",
+      "description": "Application settings including security and channel configuration",
+      "type": "object",
+      "properties": {
+        "passcode": {
+          "type": "string",
+          "description": "Admin security PIN / passcode"
+        },
+        "followers": {
+          "type": "string",
+          "description": "Real-time synced Facebook followers count"
+        },
+        "likes": {
+          "type": "string",
+          "description": "Real-time synced Facebook likes count"
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "Timestamp when settings were last updated"
+        }
+      }
+    }
+  },
+  "firestore": {
+    "/videos/{videoId}": {
+      "schema": { "$ref": "#/entities/Video" },
+      "description": "Collection of all To Know educational videos stored in the Cloud"
+    },
+    "/app_settings/{settingId}": {
+      "schema": { "$ref": "#/entities/AppSettings" },
+      "description": "System settings and synchronized security configuration"
+    }
+  }
+}
